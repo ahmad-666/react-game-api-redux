@@ -1,0 +1,19 @@
+@import '../../styles/colors.scss';
+.container {
+  width: 100%;
+  &:not(:first-of-type) {
+    margin-top: 6em;
+  }
+}
+.title {
+  color: $specialColor;
+}
+.games {
+  width: 100%;
+  height: auto;
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
