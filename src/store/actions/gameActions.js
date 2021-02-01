@@ -3,6 +3,8 @@ import {
   POPULAR_GAMES_URL,
   UPCOMING_GAMES_URL,
   NEW_GAMES_URL,
+  ACTIVE_GAME_URL,
+  ACTIVE_GAME_SCREENSHOTS,
 } from '../../api';
 import * as actionTypes from '.';
 
@@ -51,6 +53,24 @@ export const fetchUpcomingGames = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: actionTypes.FETCH_UPCOMING_GAMES_FAILED,
+    });
+  }
+};
+export const fetchActiveGame = id => async dispatch => {
+  dispatch({
+    type: actionTypes.FETCH_ACTIVE_GAME_START,
+  });
+  try {
+    const activeGameRes = await axios(ACTIVE_GAME_URL(id));
+    const activeGameShotsRes = await axios(ACTIVE_GAME_SCREENSHOTS(id));
+    dispatch({
+      type: actionTypes.FETCH_ACTIVE_GAME_FINISH,
+      activeGame: activeGameRes.data,
+      shots: activeGameShotsRes.data.results,
+    });
+  } catch (err) {
+    dispatch({
+      type: actionTypes.FETCH_ACTIVE_GAME_FAILED,
     });
   }
 };

@@ -14,6 +14,7 @@ const GameCards = ({ title, games }) => {
             name={game.name}
             img={game.background_image}
             date={game.released}
+            id={game.id}
           />
         ))}
       </div>

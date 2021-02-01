@@ -26,6 +26,18 @@
   font-family: roboto;
   line-height: 2.2em;
   padding: 2em 10%;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $pageScrollColor;
+    border-radius: 2em;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  scrollbar-width: 10px;
+  scrollbar-color: $pageScrollColor transparent;
 }
 
 html,

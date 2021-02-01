@@ -1,15 +1,19 @@
 import * as actionTypes from '../actions';
 
 const initState = {
-  isPopularLoading: false,
-  isUpcomingLoading: false,
-  isNewLoading: false,
+  isPopularLoading: true,
+  isUpcomingLoading: true,
+  isNewLoading: true,
   isPopularFailed: false,
   isUpcomingFailed: false,
   isNewFailed: false,
   popularGames: [],
   upcomingGames: [],
   newGames: [],
+  activeGame: null,
+  isActiveGameLoading: true,
+  isActiveGameFailed: false,
+  activeGameShots: [],
 };
 
 const gameReducer = (state = initState, action) => {
@@ -71,6 +75,18 @@ const gameReducer = (state = initState, action) => {
         isPopularLoading: false,
         isPopularFailed: true,
       };
+    case actionTypes.FETCH_ACTIVE_GAME_START:
+      return { ...state, isActiveGameLoading: true, isActiveGameFailed: false };
+    case actionTypes.FETCH_ACTIVE_GAME_FINISH:
+      return {
+        ...state,
+        isActiveGameLoading: false,
+        isActiveGameFailed: false,
+        activeGame: action.activeGame,
+        activeGameShots: action.shots,
+      };
+    case actionTypes.FETCH_ACTIVE_GAME_FAILED:
+      return { ...state, isActiveGameLoading: false, isActiveGameFailed: true };
     default:
       console.error(`${action.type} is invalid and no proper case found`);
       return { ...state };
