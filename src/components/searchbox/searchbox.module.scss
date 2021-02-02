@@ -1,0 +1,46 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+.form {
+  width: 100%;
+  margin-top: 2em;
+}
+.searchbox {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  box-shadow: 0 0.5em 1em $shadowColor;
+  border-radius: 2em;
+  overflow: hidden;
+}
+.input {
+  flex: 5 5;
+  height: auto;
+  padding: 1em;
+  color: $textColor;
+  font-size: $textFontSize;
+  border: none;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
+.submit {
+  flex: 1 1;
+  height: auto;
+  padding: 1em 2em;
+  cursor: pointer;
+  background-color: $specialColor;
+  color: white;
+  font-size: $textFontSize;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+.error {
+  color: $error;
+  font-size: $textFontSize;
+  margin-top: 1em;
+  text-align: center;
+}

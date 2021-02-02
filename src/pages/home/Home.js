@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import styles from './home.module.scss';
 import * as actionCreators from '../../store/actions/gameActions';
 import GameCards from '../../components/gameCards/GameCards';
@@ -24,8 +26,10 @@ const Home = () => {
     dispatch(actionCreators.fetchNewGames());
     dispatch(actionCreators.fetchPopularGames());
   }, []);
+  const { pathname } = useLocation();
+  const activeGameId = pathname.split('/')[2];
   return (
-    <>
+    <AnimateSharedLayout>
       <div className={styles.container}>
         {isUpcomingLoading ? (
           <Loader />
@@ -49,7 +53,17 @@ const Home = () => {
           <GameCards title='popular games' games={popularGames} />
         )}
       </div>
-    </>
+      <AnimatePresence exitBeforeEnter>
+        {activeGameId && (
+          <GameDetail
+            cardId={activeGameId.toString()}
+            imgId={`img-${activeGameId}`}
+            titleId={`title-${activeGameId}`}
+            dateId={`date-${activeGameId}`}
+          />
+        )}
+      </AnimatePresence>
+    </AnimateSharedLayout>
   );
 };
 export default Home;

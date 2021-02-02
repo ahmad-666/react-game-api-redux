@@ -1,0 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+.error {
+  font-size: $textFontSize;
+  color: $error;
+}

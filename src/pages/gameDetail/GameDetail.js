@@ -10,8 +10,11 @@ import {
   faAppStore,
 } from '@fortawesome/free-brands-svg-icons';
 import { faStarHalf, faStar } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import styles from './gameDetail.module.scss';
 import Loader from '../../components/loader/Loader';
+import { blackFilterAnimation } from '../../animation';
 
 const getIcon = name => {
   switch (true) {
@@ -40,6 +43,7 @@ const getStars = score => {
         color='royalblue'
         icon={faStar}
         className={styles.star}
+        key={i}
       />
     );
   }
@@ -50,12 +54,13 @@ const getStars = score => {
         color='royalblue'
         icon={faStarHalf}
         className={styles.star}
+        key={4}
       />
     );
   return stars;
 };
 
-const GameDetail = () => {
+const GameDetail = ({ cardId, imgId, titleId, dateId }) => {
   const blackFilterElm = useRef(null);
   const history = useHistory();
   const {
@@ -71,32 +76,43 @@ const GameDetail = () => {
       history.push('/');
     }
   };
+  let bgResize = null;
+  if (!isActiveGameLoading) {
+    const splits = activeGame.background_image.split('media/');
+    bgResize = [splits[0], 'media/', 'resize/1280/-/', splits[1]].join('');
+  }
+
   return (
-    <div
+    <motion.div
       className={styles.blackFilter}
       onClick={blackFilterHandler}
       ref={blackFilterElm}
+      variants={blackFilterAnimation}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      layoutId={cardId.toString()}
     >
       <div className={styles.container}>
-        {isActiveGameLoading ? (
-          <Loader />
-        ) : isActiveGameFailed ? (
-          <p className={styles.error}> cannot fetch game </p>
-        ) : (
+        {!isActiveGameLoading && (
           <>
             <div className={styles.title}>
               <div className={styles.infos}>
-                <p className={styles.info}> {activeGame.name} </p>
-                <p className={styles.info}> {activeGame.released} </p>
+                <motion.p className={styles.info} layoutId={titleId}>
+                  {activeGame.name}
+                </motion.p>
+                <motion.p className={styles.info} layoutId={dateId}>
+                  {activeGame.released}
+                </motion.p>
                 <p className={styles.info}> {activeGame.rating} </p>
                 <div className={styles.stars}>
                   {getStars(activeGame.rating)}
                 </div>
               </div>
               <div className={styles.platforms}>
-                {activeGame.platforms.map(platform => {
+                {activeGame.platforms.map((platform, i) => {
                   return (
-                    <div key={platform.platform.id} className={styles.platform}>
+                    <div key={i} className={styles.platform}>
                       <FontAwesomeIcon
                         size='2x'
                         className={styles.platformIcon}
@@ -110,32 +126,49 @@ const GameDetail = () => {
                 })}
               </div>
             </div>
-            <div className={styles.cover}>
-              <img
-                className={styles.coverImg}
-                src={activeGame.background_image}
-                alt={activeGame.background_image}
-              />
-            </div>
+            <motion.div className={styles.cover} layoutId={imgId}>
+              <img className={styles.coverImg} src={bgResize} alt={bgResize} />
+            </motion.div>
             <div className={styles.desc}>
               <p className={styles.descContent}>
-                {activeGame.description.replace(/(<.*>)/gim, '')}
+                {activeGame.description.replace(/(<([^>]+)>)/gim, '')}
               </p>
             </div>
             <div className={styles.shots}>
-              {activeGameShots.map(activeGameShot => (
-                <img
-                  className={styles.shot}
-                  key={activeGameShot.id}
-                  src={activeGameShot.image}
-                  alt={activeGameShot.image}
-                />
-              ))}
+              {activeGameShots.map(activeGameShot => {
+                const splits1 = activeGameShot.image.split('media/');
+                const resiszeImgSrc = [
+                  splits1[0],
+                  'media/',
+                  'resize/420/-/',
+                  splits1[1],
+                ].join('');
+                return (
+                  <img
+                    className={styles.shot}
+                    key={activeGameShot.id}
+                    src={resiszeImgSrc}
+                    alt={resiszeImgSrc}
+                  />
+                );
+              })}
             </div>
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
+};
+GameDetail.defaultProps = {
+  cardId: 0,
+  imgId: '',
+  titleId: '',
+  dateId: '',
+};
+GameDetail.propTypes = {
+  cardId: PropTypes.string,
+  imgId: PropTypes.string,
+  titleId: PropTypes.string,
+  dateId: PropTypes.string,
 };
 export default GameDetail;

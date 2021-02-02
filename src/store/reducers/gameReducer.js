@@ -10,10 +10,13 @@ const initState = {
   popularGames: [],
   upcomingGames: [],
   newGames: [],
-  activeGame: null,
+  activeGame: {},
   isActiveGameLoading: true,
   isActiveGameFailed: false,
   activeGameShots: [],
+  searchGames: [],
+  isSearchLoading: true,
+  isSearchFailed: false,
 };
 
 const gameReducer = (state = initState, action) => {
@@ -87,6 +90,17 @@ const gameReducer = (state = initState, action) => {
       };
     case actionTypes.FETCH_ACTIVE_GAME_FAILED:
       return { ...state, isActiveGameLoading: false, isActiveGameFailed: true };
+    case actionTypes.FETCH_SEARCH_GAME_START:
+      return { ...state, isSearchLoading: true, isSearchFailed: false };
+    case actionTypes.FETCH_SEARCH_GAMES_FINISH:
+      return {
+        ...state,
+        isSearchLoading: false,
+        isSearchFailed: false,
+        searchGames: action.searchGames,
+      };
+    case actionTypes.FETCH_SEARCH_GAME_FAILED:
+      return { ...state, isSearchLoading: false, isSearchFailed: true };
     default:
       console.error(`${action.type} is invalid and no proper case found`);
       return { ...state };

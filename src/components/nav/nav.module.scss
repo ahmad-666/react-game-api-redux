@@ -1,0 +1,26 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+.nav {
+  width: 60em;
+  margin: 2em auto;
+}
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 7em;
+  height: 7em;
+}
+.sitename {
+  font-size: $titleFontSize;
+  color: $specialColor;
+  margin-top: 0.3em;
+}
+@media screen and (max-width: 500px) {
+  .nav {
+    width: 100%;
+  }
+}

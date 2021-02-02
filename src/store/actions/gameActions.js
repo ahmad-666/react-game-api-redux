@@ -5,6 +5,7 @@ import {
   NEW_GAMES_URL,
   ACTIVE_GAME_URL,
   ACTIVE_GAME_SCREENSHOTS,
+  SEARCH_GAME_URL,
 } from '../../api';
 import * as actionTypes from '.';
 
@@ -72,5 +73,17 @@ export const fetchActiveGame = id => async dispatch => {
     dispatch({
       type: actionTypes.FETCH_ACTIVE_GAME_FAILED,
     });
+  }
+};
+export const fetchSearchGames = searchVal => async dispatch => {
+  dispatch({ type: actionTypes.FETCH_SEARCH_GAME_START });
+  try {
+    const searchRes = await axios(SEARCH_GAME_URL(searchVal));
+    dispatch({
+      type: actionTypes.FETCH_SEARCH_GAMES_FINISH,
+      searchGames: searchRes.data.results,
+    });
+  } catch (err) {
+    dispatch({ type: actionTypes.FETCH_SEARCH_GAME_FAILED });
   }
 };

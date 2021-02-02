@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 import styles from './gameCard.module.scss';
 import { fetchActiveGame } from '../../store/actions/gameActions';
+import { gameCardAnimation } from '../../animation';
 
 const GameCard = ({ name, date, img, id }) => {
   const dispatch = useDispatch();
@@ -11,16 +13,36 @@ const GameCard = ({ name, date, img, id }) => {
     dispatch(fetchActiveGame(id));
     document.body.classList.add('disableScroll');
   };
+  const splits = img && img.split('media/');
+  const resizeImgSrc =
+    splits &&
+    splits.length &&
+    [splits[0], 'media/', 'resize/420/-/', splits[1]].join('');
   return (
-    <div className={styles.card}>
+    <motion.div
+      className={styles.card}
+      variants={gameCardAnimation}
+      initial='initial'
+      animate='animate'
+      layoutId={id.toString()}
+    >
       <Link to={`/games/${id}`} onClick={() => clickHandler()}>
-        <img src={img} alt={img} className={styles.img} />
+        <motion.img
+          src={resizeImgSrc}
+          alt={resizeImgSrc}
+          className={styles.img}
+          layoutId={`img-${id}`}
+        />
         <div className={styles.content}>
-          <p className={styles.info}> {name} </p>
-          <p className={styles.info}> {date} </p>
+          <motion.p className={styles.info} layoutId={`title-${id}`}>
+            {name}
+          </motion.p>
+          <motion.p className={styles.info} layoutId={`date-${id}`}>
+            {date}
+          </motion.p>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 GameCard.defaultProps = {

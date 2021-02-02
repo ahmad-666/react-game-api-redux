@@ -113,3 +113,15 @@
   color: $error;
   text-align: center;
 }
+@media screen and (max-width: 600px) {
+  .shots {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  .shot {
+    max-width: initial;
+    width: 100%;
+    height: auto;
+    max-height: 25em;
+  }
+}
