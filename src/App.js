@@ -15,7 +15,7 @@ function App() {
   return (
     <div className='App'>
       <Nav />
-      <Slider imgs={sliderImgs} timer={3000} />
+      <Slider imgs={sliderImgs} timer={5000} />
       <Switch>
         <Route path={['/', '/games/:id']} exact>
           <Home />
