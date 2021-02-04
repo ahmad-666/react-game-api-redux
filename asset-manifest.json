@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/react-game-api-reduxo/static/css/main.546cadb7.chunk.css",
+    "main.js": "/react-game-api-reduxo/static/js/main.85cb4c5a.chunk.js",
+    "main.js.map": "/react-game-api-reduxo/static/js/main.85cb4c5a.chunk.js.map",
+    "runtime-main.js": "/react-game-api-reduxo/static/js/runtime-main.3a8b3967.js",
+    "runtime-main.js.map": "/react-game-api-reduxo/static/js/runtime-main.3a8b3967.js.map",
+    "static/js/2.5609c036.chunk.js": "/react-game-api-reduxo/static/js/2.5609c036.chunk.js",
+    "static/js/2.5609c036.chunk.js.map": "/react-game-api-reduxo/static/js/2.5609c036.chunk.js.map",
+    "index.html": "/react-game-api-reduxo/index.html",
+    "static/css/main.546cadb7.chunk.css.map": "/react-game-api-reduxo/static/css/main.546cadb7.chunk.css.map",
+    "static/js/2.5609c036.chunk.js.LICENSE.txt": "/react-game-api-reduxo/static/js/2.5609c036.chunk.js.LICENSE.txt",
+    "static/media/app.scss": "/react-game-api-reduxo/static/media/Roboto-Regular.03523cf5.ttf",
+    "static/media/logo.bdc61627.png": "/react-game-api-reduxo/static/media/logo.bdc61627.png",
+    "static/media/slide0.f902b952.jpg": "/react-game-api-reduxo/static/media/slide0.f902b952.jpg",
+    "static/media/slide1.4bdb1ee6.jpg": "/react-game-api-reduxo/static/media/slide1.4bdb1ee6.jpg",
+    "static/media/slide2.4575df50.jpg": "/react-game-api-reduxo/static/media/slide2.4575df50.jpg",
+    "static/media/slide3.5fd83965.jpg": "/react-game-api-reduxo/static/media/slide3.5fd83965.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3a8b3967.js",
+    "static/js/2.5609c036.chunk.js",
+    "static/css/main.546cadb7.chunk.css",
+    "static/js/main.85cb4c5a.chunk.js"
+  ]
+}
