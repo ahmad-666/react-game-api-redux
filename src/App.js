@@ -11,7 +11,6 @@ import slide3ImgSrc from './assets/imgs/slide3.jpg';
 import Home from './pages/home/Home';
 
 const sliderImgs = [slide0ImgSrc, slide1ImgSrc, slide2ImgSrc, slide3ImgSrc];
-
 function App() {
   return (
     <div className='App'>

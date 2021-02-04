@@ -51,6 +51,7 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "spaced-comment": "warn",
     "no-nested-ternary": "off",
+    "react/jsx-no-bind": "warn",
     "prettier/prettier": [
       "warn",
       {

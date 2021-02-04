@@ -29,7 +29,7 @@ const Home = () => {
   const { pathname } = useLocation();
   const activeGameId = pathname.split('/')[2];
   return (
-    <AnimateSharedLayout>
+    <AnimateSharedLayout type='crossfade'>
       <div className={styles.container}>
         {isUpcomingLoading ? (
           <Loader />
